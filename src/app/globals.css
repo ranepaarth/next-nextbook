@@ -2,3 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-neutral-200;
+  }
+}
+
+@layer components {
+  .right-header-icon {
+    @apply hidden h-8 cursor-pointer rounded-full bg-neutral-200 p-2 text-neutral-600 hover:bg-neutral-300 xl:inline-flex;
+  }
+}
