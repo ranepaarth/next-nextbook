@@ -1,9 +1,17 @@
-export default function Home() {
+import Feed from '@/components/Feed';
+import Header from '@/components/Header';
+import Sidebar from '@/components/Sidebar';
+import Widgets from '@/components/Widgets';
+
+export default async function Home() {
   return (
-    <section className='py-24'>
-      <div className='container'>
-        <h1 className='text-3xl font-bold'>Next TS Starter Template</h1>
-      </div>
-    </section>
+    <div className=''>
+      <Header />
+      <main className='grid grid-cols-12 gap-x-4 px-2 py-2 sm:px-6 lg:gap-x-10 lg:px-16'>
+        <Sidebar />
+        <Feed />
+        <Widgets />
+      </main>
+    </div>
   );
 }

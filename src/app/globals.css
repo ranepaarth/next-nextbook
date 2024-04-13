@@ -10,6 +10,6 @@
 
 @layer components {
   .right-header-icon {
-    @apply hidden h-8 cursor-pointer rounded-full bg-neutral-200 p-2 text-neutral-600 hover:bg-neutral-300 xl:inline-flex;
+    @apply h-8 w-8 cursor-pointer rounded-full bg-neutral-200 p-2 text-neutral-600 transition-colors duration-200 ease-in-out hover:bg-neutral-300;
   }
 }
