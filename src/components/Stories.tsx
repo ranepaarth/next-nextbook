@@ -31,7 +31,7 @@ const stories: Story[] = [
 
 function Stories() {
   return (
-    <div className='flex w-full justify-evenly space-x-4 sm:space-x-4 '>
+    <div className='flex w-full justify-evenly space-x-2 sm:space-x-4'>
       {stories.map(story => (
         <StoryCard
           name={story.name}

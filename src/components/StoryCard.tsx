@@ -3,7 +3,7 @@ import React from 'react';
 
 function StoryCard({ name, profile, src }: Story) {
   return (
-    <article className='group: relative  h-28 w-2/6 transform transition-all duration-500 ease-in hover:scale-105 hover:animate-pulse lg:h-[300px]'>
+    <article className='group: relative w-2/6 transform transition-all duration-500 ease-in hover:scale-105 hover:animate-pulse h-[150px] md:h-[200px] lg:h-[250px]'>
       <Image
         src={profile}
         alt='avatar'
@@ -17,7 +17,7 @@ function StoryCard({ name, profile, src }: Story) {
         width={100}
         height={300}
         quality={90}
-        className=' top-10 z-50 h-[150px] w-full rounded-lg bg-white brightness-50 filter  sm:block sm:h-[150px] md:h-[200px] lg:h-[300px]'
+        className=' top-10 z-50 h-full w-full rounded-lg bg-white brightness-50 filter  sm:block'
       />
       <span className='absolute bottom-2 left-2 hidden truncate text-sm text-neutral-200 lg:block'>
         {name}
