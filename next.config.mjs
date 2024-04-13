@@ -13,6 +13,9 @@ const nextConfig = {
       {
         hostname: 'platform-lookaside.fbsbx.com',
       },
+      {
+        hostname: 'fastly.picsum.photos',
+      },
     ],
 
     dangerouslyAllowSVG: true,

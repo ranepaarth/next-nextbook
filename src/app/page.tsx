@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <div className=''>
       <Header />
-      <main className='grid grid-cols-12 gap-x-4 px-2 py-2 sm:px-6 lg:gap-x-10 lg:px-16'>
+      <main className='mt-5 flex w-full items-start gap-x-4 px-2 py-2 sm:px-4 lg:gap-x-8'>
         <Sidebar />
         <Feed />
         <Widgets />
