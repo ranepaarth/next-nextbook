@@ -14,7 +14,7 @@ type SideBarRowProps = {
 
 function SideBarRow({ src, Icon, title }: SideBarRowProps) {
   return (
-    <div className='flex cursor-pointer items-center gap-x-2 rounded-lg p-2 transition-colors duration-200 ease-in-out hover:bg-neutral-100'>
+    <div className='flex cursor-pointer items-center gap-x-2 rounded-lg p-2 text-sm font-medium transition-colors duration-200 ease-in-out hover:bg-neutral-100'>
       {src && (
         <Image
           src={src}
@@ -26,7 +26,7 @@ function SideBarRow({ src, Icon, title }: SideBarRowProps) {
         />
       )}
       {Icon && <Icon className='h-6 w-6 text-blue-500' />}
-      <span className='truncate text-sm font-medium text-neutral-800 max-md:hidden sm:block'>
+      <span className='truncate   text-neutral-800 max-md:hidden sm:block'>
         {title}
       </span>
     </div>
