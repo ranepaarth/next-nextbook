@@ -17,7 +17,7 @@ async function RightHeader() {
         <LoginBtn user={session?.user} />
         {session?.user && <LogoutBtn />}
       </div>
-      <div className='hidden items-center gap-x-2 md:inline-flex'>
+      <div className='hidden items-center gap-x-2 lg:inline-flex'>
         <ChatBubbleOvalLeftEllipsisIcon className='right-header-icon' />
         <BellIcon className='right-header-icon' />
         <ChevronDownIcon className='right-header-icon' />

@@ -11,7 +11,7 @@ function LeftHeader() {
         width={30}
         height={30}
       />
-      <div className='flex w-full max-w-[250px] items-center gap-x-2 rounded-xl bg-neutral-200 p-2 text-sm'>
+      <div className='flex w-full items-center gap-x-2 rounded-xl bg-neutral-200 p-2 text-sm'>
         <MagnifyingGlassIcon
           className='h-4 text-neutral-500'
           strokeWidth={2.5}
