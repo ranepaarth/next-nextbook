@@ -10,7 +10,8 @@ import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import { Loader2 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import React, { FormEvent, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
 import { db, storage } from '../../firebase';
 import FeedInputFooter from './FeedInputFooter';
 import PlaceholderAvatar from './PlaceholderAvatar';
@@ -19,12 +20,12 @@ function FeedInputBox() {
   const [image, setImage] = useState<string | ArrayBuffer | null | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
   const { data: session } = useSession();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const sendPost = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const sendPost = async () => {
     setLoading(true);
     try {
+      if (!inputRef.current?.value && !image) return;
       if (!inputRef.current?.value) return;
       const docRef = await addDoc(collection(db, 'posts'), {
         message: inputRef.current.value,
@@ -67,8 +68,8 @@ function FeedInputBox() {
           <Loader2 className='h-8 w-8 animate-spin text-blue-500' />
         </div>
       )}
-      <div className='w-full flex-col justify-center divide-y-2 rounded-lg bg-white p-2 shadow-md'>
-        <div className='items-centre flex w-full space-x-4 py-2 font-medium text-neutral-800'>
+      <div className='w-full flex-col justify-center rounded-lg bg-white p-2 shadow-md'>
+        <div className='flex w-full items-start space-x-4 py-2 font-medium text-neutral-800 '>
           {session?.user ? (
             <Image
               src={session?.user?.image!}
@@ -81,17 +82,26 @@ function FeedInputBox() {
             <PlaceholderAvatar className='h-6 w-6 text-neutral-50' />
           )}
           <form className='flex flex-1' onSubmit={sendPost}>
-            <input
-              type='text'
+            <TextareaAutosize
               placeholder={`What's on your mind ${session?.user ? session?.user?.name : ''}?`}
+              maxRows={10}
               ref={inputRef}
-              className='w-full rounded-full bg-neutral-100 px-5 outline-none'
+              className='w-full resize-none rounded-lg bg-neutral-100 px-5 py-2 outline-none'
             />
             <button type='submit' hidden>
               Submit
             </button>
           </form>
         </div>
+        <button
+          className='mt-2 w-full rounded bg-blue-900/75 py-1.5 text-sm font-medium text-white hover:bg-blue-900/90 disabled:bg-neutral-200 md:text-base'
+          disabled={!image || inputRef.current?.value === ''}
+          onClick={sendPost}
+        >
+          Post
+        </button>
+
+        <hr className='mt-4' />
         <FeedInputFooter
           removeImage={removeImage}
           setImage={setImage}
