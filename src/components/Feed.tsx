@@ -1,12 +1,14 @@
 import React from 'react';
+import FeedInputBox from './FeedInputBox';
+import PostsList from './PostsList';
 import Stories from './Stories';
 
 function Feed() {
   return (
-    <section className='max-w-[980px] sm:w-full w-full'>
+    <section className='flex w-full max-w-[980px] flex-col justify-center sm:w-full'>
       <Stories />
-      {/* Input box */}
-      {/* Posts */}
+      <FeedInputBox />
+      <PostsList />
     </section>
   );
 }
