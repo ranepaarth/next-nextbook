@@ -16,6 +16,9 @@ const nextConfig = {
       {
         hostname: 'fastly.picsum.photos',
       },
+      {
+        hostname: 'firebasestorage.googleapis.com',
+      },
     ],
 
     dangerouslyAllowSVG: true,
