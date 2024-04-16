@@ -10,7 +10,7 @@ import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import { Loader2 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { db, storage } from '../../firebase';
 import FeedInputFooter from './FeedInputFooter';
@@ -19,16 +19,16 @@ import PlaceholderAvatar from './PlaceholderAvatar';
 function FeedInputBox() {
   const [image, setImage] = useState<string | ArrayBuffer | null | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>('');
   const { data: session } = useSession();
-  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const sendPost = async () => {
     setLoading(true);
     try {
-      if (!inputRef.current?.value && !image) return;
-      if (!inputRef.current?.value) return;
+      if (!message && !image) return;
+      if (!message) return;
       const docRef = await addDoc(collection(db, 'posts'), {
-        message: inputRef.current.value,
+        message: message,
         name: session?.user?.name,
         email: session?.user?.email,
         avatarURL: session?.user?.image,
@@ -49,7 +49,7 @@ function FeedInputBox() {
           });
       }
       setImage(null);
-      inputRef.current.value = '';
+      setMessage('')
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -85,7 +85,8 @@ function FeedInputBox() {
             <TextareaAutosize
               placeholder={`What's on your mind ${session?.user ? session?.user?.name : ''}?`}
               maxRows={10}
-              ref={inputRef}
+              value={message}
+              onChange={e => setMessage(e.target.value)}
               className='w-full resize-none rounded-lg bg-neutral-100 px-5 py-2 outline-none'
             />
             <button type='submit' hidden>
@@ -95,7 +96,7 @@ function FeedInputBox() {
         </div>
         <button
           className='mt-2 w-full rounded bg-blue-900/75 py-1.5 text-sm font-medium text-white hover:bg-blue-900/90 disabled:bg-neutral-200 md:text-base'
-          disabled={!image || inputRef.current?.value === ''}
+          disabled={!image || !message}
           onClick={sendPost}
         >
           Post
