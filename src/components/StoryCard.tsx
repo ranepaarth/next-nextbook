@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
+import { Story } from '../../types';
 
 function StoryCard({ name, profile, src }: Story) {
   return (
