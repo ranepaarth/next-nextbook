@@ -19,7 +19,7 @@ function PostsList({ posts }:PostsProps) {
             <SinglePost post={post.data()} key={post.id} />
           ))
         : posts.map((post: DocumentData) => (
-            <SinglePost post={post} key={post.id} />
+            <SinglePost post={post.data} key={post.id} />
           ))}
     </section>
   );
