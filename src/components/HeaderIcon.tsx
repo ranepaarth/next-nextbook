@@ -1,12 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 type IconProp = {
-  Icon: React.ForwardRefExoticComponent<
-    Omit<React.SVGProps<SVGSVGElement>, 'ref'> & {
-      title?: string;
-      titleId?: string;
-    } & React.RefAttributes<SVGSVGElement>
-  >;
+  Icon: FC<React.SVGProps<SVGSVGElement>>;
   isActive?: boolean;
 };
 function HeaderIcon({ Icon, isActive }: IconProp) {

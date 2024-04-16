@@ -1,14 +1,9 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { FC } from 'react';
 
 type SideBarRowProps = {
   src?: string | null | undefined;
-  Icon?: React.ForwardRefExoticComponent<
-    Omit<React.SVGProps<SVGSVGElement>, 'ref'> & {
-      title?: string;
-      titleId?: string;
-    } & React.RefAttributes<SVGSVGElement>
-  >;
+  Icon?: FC<React.SVGProps<SVGSVGElement>>;
   title: string | null | undefined;
 };
 
