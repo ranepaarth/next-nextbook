@@ -26,7 +26,6 @@ function FeedInputBox() {
     setLoading(true);
     try {
       if (!message && !image) return;
-      if (!message) return;
       const docRef = await addDoc(collection(db, 'posts'), {
         message: message,
         name: session?.user?.name,
@@ -81,7 +80,7 @@ function FeedInputBox() {
           <form className='flex flex-1' onSubmit={sendPost}>
             <TextareaAutosize
               placeholder={`What's on your mind ${session?.user ? session?.user?.name : ''}?`}
-              minRows={1}
+              minRows={2}
               maxRows={10}
               value={message}
               disabled={!session?.user}

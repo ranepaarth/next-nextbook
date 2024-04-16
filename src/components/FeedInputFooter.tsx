@@ -1,6 +1,6 @@
 'use client';
 
-import { FaceSmileIcon } from '@heroicons/react/24/outline';
+import { FaceSmileIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { CameraIcon, VideoCameraIcon } from '@heroicons/react/24/solid';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -39,15 +39,15 @@ function FeedInputFooter({ removeImage, setImage, image }: Props) {
           className='hover: relative flex transform cursor-pointer flex-col items-center gap-y-4 rounded-lg bg-neutral-100 p-2'
           onClick={removeImage}
         >
-          <span className='absolute bottom-2 right-2 flex justify-end rounded-md bg-red-400 px-2 py-1 text-xs font-medium capitalize text-white transition-colors duration-200 ease-in-out hover:bg-red-500'>
-            remove image
+          <span className='absolute right-2 top-2 flex justify-end rounded-full bg-neutral-300 p-1.5 text-xs font-medium capitalize text-neutral-700 transition-colors duration-200 ease-in-out hover:bg-neutral-400 z-20'>
+            <XMarkIcon className='h-4 w-4' strokeWidth={3} />
           </span>
           <Image
             src={image as string}
             alt='image'
-            width={20}
-            height={20}
-            className='w-2/5 object-contain filter transition duration-150 hover:brightness-110'
+            width={1080}
+            height={1080}
+            className='w-full object-contain filter transition duration-150 hover:brightness-110 rounded-md'
           />
         </div>
       )}
