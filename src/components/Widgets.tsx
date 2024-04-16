@@ -4,38 +4,39 @@ import {
   VideoCameraIcon,
 } from '@heroicons/react/24/solid';
 import React from 'react';
-import Contact from './Contact';
+import { Contact } from '../../types';
+import SingleContact from './SingleContact';
 
 const contacts: Contact[] = [
   {
     src: 'https://api.dicebear.com/8.x/open-peeps/svg?seed=Peter%20Parker',
-    isOnline:false,
+    isOnline: false,
     name: 'Peter Parker',
   },
   {
     src: 'https://api.dicebear.com/8.x/open-peeps/svg?seed=Harry%20Potter',
-    isOnline:true,
+    isOnline: true,
     name: 'Harry Potter',
   },
   {
     src: 'https://api.dicebear.com/8.x/open-peeps/svg?seed=Jack%20Ryan',
-    isOnline:true,
+    isOnline: true,
     name: 'Jack Ryan',
   },
   {
     src: 'https://api.dicebear.com/8.x/open-peeps/svg?seed=Tony%20Stark',
-    isOnline:false,
+    isOnline: false,
     name: 'Tony Stark',
   },
   {
     src: 'https://api.dicebear.com/8.x/open-peeps/svg?seed=John%20Doe',
-    isOnline:true,
+    isOnline: true,
     name: 'John Doe',
   },
 ];
 function Widgets() {
   return (
-    <div className='hidden min-w-[250px] max-w-[600px] xl:inline-flex flex-col items-start'>
+    <div className='hidden min-w-[250px] max-w-[600px] flex-col items-start xl:inline-flex'>
       <div className='flex w-full justify-between text-neutral-500'>
         <span className='font-medium capitalize'>contacts</span>
         <div className='flex items-center gap-x-1'>
@@ -52,9 +53,9 @@ function Widgets() {
       </div>
 
       {/* <div> */}
-        {contacts.map(contact => (
-          <Contact contact={contact} key={contact.name} />
-        ))}
+      {contacts.map(contact => (
+        <SingleContact contact={contact} key={contact.name} />
+      ))}
       {/* </div> */}
     </div>
   );

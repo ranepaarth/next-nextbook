@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
+import { Contact } from '../../types';
 
-function Contact({ contact }: { contact: Contact }) {
+function SingleContact({ contact }: { contact: Contact }) {
   return (
     <div className='flex cursor-pointer items-center space-x-3 rounded-lg px-4 py-2 hover:bg-neutral-300 w-full'>
       <div className='relative'>
@@ -23,4 +24,4 @@ function Contact({ contact }: { contact: Contact }) {
   );
 }
 
-export default Contact;
+export default SingleContact;
