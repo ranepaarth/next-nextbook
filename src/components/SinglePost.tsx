@@ -1,11 +1,16 @@
-import { DocumentData } from 'firebase/firestore';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid';
+import { collection, deleteDoc, doc, DocumentData } from 'firebase/firestore';
 import { MessageSquareMoreIcon, Share, ThumbsUpIcon } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React from 'react';
 import ReactTextareaAutosize from 'react-textarea-autosize';
+import { db } from '../../firebase';
 import ProfileAvatar from './ProfileAvatar';
 
-function SinglePost({ post }: DocumentData) {
+function SinglePost({ post, postId }: DocumentData) {
+  const { data: session } = useSession();
   const millisecond =
     post?.timestamp?.seconds * 1000 +
     Math.floor(post?.timestamp?.nanoseconds / 1e6);
@@ -18,18 +23,41 @@ function SinglePost({ post }: DocumentData) {
 
   return (
     <article className='flex w-full flex-col rounded-lg bg-white pb-2 pt-4 shadow-md'>
-      <div className='flex items-start gap-x-2 px-4'>
-        <ProfileAvatar src={post.avatarURL} />
-        <div className='flex flex-col'>
-          <span className='text-sm font-bold text-neutral-800 md:text-base'>
-            {post.name}
-          </span>
-          <span className='text-xs font-medium text-neutral-500'>{date}</span>
+      <div className='flex items-start justify-between px-4'>
+        <div className='flex items-start gap-x-2'>
+          <ProfileAvatar src={post.avatarURL} />
+          <div className='flex flex-col'>
+            <span className='text-sm font-bold text-neutral-800 md:text-base'>
+              {post.name}
+            </span>
+            <span className='text-xs font-medium text-neutral-500'>{date}</span>
+          </div>
+        </div>
+
+        <div className='flex items-center gap-x-2 text-neutral-800'>
+          <EllipsisHorizontalIcon className='w-7' />
+          {session?.user?.image === post.avatarURL && (
+            <button
+              onClick={() => {
+                console.log('deleting ', postId),
+                  deleteDoc(doc(db, 'posts', postId));
+              }}
+            >
+              <XMarkIcon
+                className='w-7 cursor-pointer rounded-full p-1 transition-colors duration-200 ease-in-out hover:bg-neutral-200'
+                strokeWidth={2}
+              />
+            </button>
+          )}
         </div>
       </div>
 
       <div className='mt-2 px-4 text-sm font-light md:text-base'>
-        <ReactTextareaAutosize value={post.message} className='resize-none w-full outline-none bg-transparent' disabled/>
+        <ReactTextareaAutosize
+          value={post.message}
+          className='w-full resize-none bg-transparent outline-none'
+          disabled
+        />
       </div>
 
       {post.postImageURL && (
