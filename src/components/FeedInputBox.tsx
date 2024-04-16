@@ -34,6 +34,7 @@ function FeedInputBox() {
         avatarURL: session?.user?.image,
         timestamp: serverTimestamp(),
       });
+      console.log(docRef.id);
       const imageRef = ref(storage, `posts/${docRef.id}`);
       if (image) {
         await uploadString(imageRef, image as string, 'data_url')
@@ -49,7 +50,7 @@ function FeedInputBox() {
           });
       }
       setImage(null);
-      setMessage('')
+      setMessage('');
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -62,21 +63,17 @@ function FeedInputBox() {
   };
 
   return (
-    <div className='relative mx-auto mt-10 flex w-full max-w-[800px]'>
-      {loading && (
-        <div className='absolute inset-0 z-20 flex items-center justify-center rounded-lg bg-neutral-600/10'>
-          <Loader2 className='h-8 w-8 animate-spin text-blue-500' />
-        </div>
-      )}
+    <div className='relative mx-auto mt-10 flex w-full max-w-[600px]'>
       <div className='w-full flex-col justify-center rounded-lg bg-white p-2 shadow-md'>
         <div className='flex w-full items-start space-x-4 py-2 font-medium text-neutral-800 '>
           {session?.user ? (
             <Image
               src={session?.user?.image!}
-              width={40}
-              height={40}
+              width={1080}
+              height={1080}
               alt='avatar'
-              className='rounded-full'
+              quality={90}
+              className='w-10 rounded-full'
             />
           ) : (
             <PlaceholderAvatar className='h-6 w-6 text-neutral-50' />
@@ -84,8 +81,10 @@ function FeedInputBox() {
           <form className='flex flex-1' onSubmit={sendPost}>
             <TextareaAutosize
               placeholder={`What's on your mind ${session?.user ? session?.user?.name : ''}?`}
+              minRows={1}
               maxRows={10}
               value={message}
+              disabled={!session?.user}
               onChange={e => setMessage(e.target.value)}
               className='w-full resize-none rounded-lg bg-neutral-100 px-5 py-2 outline-none'
             />
@@ -95,11 +94,15 @@ function FeedInputBox() {
           </form>
         </div>
         <button
-          className='mt-2 w-full rounded bg-blue-900/75 py-1.5 text-sm font-medium text-white hover:bg-blue-900/90 disabled:bg-neutral-200 md:text-base'
-          disabled={!image || !message}
+          className='mt-2 flex w-full justify-center rounded bg-blue-900/75 py-1.5 text-sm font-medium text-white hover:bg-blue-900/90 disabled:bg-neutral-400 md:text-base'
+          disabled={(!image && !message) || loading}
           onClick={sendPost}
         >
-          Post
+          {loading ? (
+            <Loader2 className='h-5 w-5 animate-spin text-white' />
+          ) : (
+            'Post'
+          )}
         </button>
 
         <hr className='mt-4' />

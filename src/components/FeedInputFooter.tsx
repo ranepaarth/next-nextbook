@@ -2,6 +2,7 @@
 
 import { FaceSmileIcon } from '@heroicons/react/24/outline';
 import { CameraIcon, VideoCameraIcon } from '@heroicons/react/24/solid';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React, { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 
@@ -13,6 +14,7 @@ type Props = {
 
 function FeedInputFooter({ removeImage, setImage, image }: Props) {
   const filePickerRef = useRef<HTMLInputElement>(null);
+  const { data: session } = useSession();
 
   const addImageToPost = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -50,15 +52,18 @@ function FeedInputFooter({ removeImage, setImage, image }: Props) {
         </div>
       )}
       <div className='flex w-full items-center justify-around text-xs font-medium capitalize text-neutral-700 sm:text-sm xl:text-base'>
-        <div className='feed-input-box-footer-icon-container'>
+        <button className='feed-input-box-footer-icon-container'>
           <VideoCameraIcon className='h-6 text-red-500' />
           <p>live video</p>
-        </div>
-        <div
+        </button>
+        <button
           onClick={handlePseudoClick}
           className='feed-input-box-footer-icon-container'
+          disabled={!session?.user}
         >
-          <CameraIcon className='h-6 text-green-500' />
+          <CameraIcon
+            className={`h-6  ${!session?.user ? 'text-neutral-500' : 'text-green-500'}`}
+          />
           <p>Photo/Video</p>
           <input
             type='file'
@@ -67,11 +72,11 @@ function FeedInputFooter({ removeImage, setImage, image }: Props) {
             ref={filePickerRef}
             accept='image/*'
           />
-        </div>
-        <div className='feed-input-box-footer-icon-container'>
+        </button>
+        <button className='feed-input-box-footer-icon-container'>
           <FaceSmileIcon className='h-6 text-yellow-500' />
           <p>feeling/activity</p>
-        </div>
+        </button>
       </div>
     </div>
   );
