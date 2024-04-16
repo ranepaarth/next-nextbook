@@ -2,11 +2,13 @@ import Feed from '@/components/Feed';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import Widgets from '@/components/Widgets';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 export default async function Home() {
-  const posts = await getDocs(collection(db, 'posts'));
+  const posts = await getDocs(
+    query(collection(db, 'posts'), orderBy('timestamp', 'desc')),
+  );
   const docs = posts.docs.map(post => {
     return {
       id: post.id,
