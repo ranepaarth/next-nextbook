@@ -11,7 +11,11 @@ function SinglePost({ post }: DocumentData) {
     post?.timestamp?.seconds * 1000 +
     Math.floor(post?.timestamp?.nanoseconds / 1e6);
 
-  const date = new Date(millisecond).toLocaleDateString();
+  const date = new Date(millisecond).toLocaleDateString('en-GB',{
+    day:'numeric',
+    month:'long',
+    year:'numeric',
+  });
 
   return (
     post.postImageURL && (
