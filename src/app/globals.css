@@ -14,10 +14,10 @@
   }
 
   .feed-input-box-footer-icon-container {
-    @apply flex flex-1 cursor-pointer items-center justify-center gap-y-1 rounded-lg py-2 hover:bg-neutral-200 gap-x-2;
+    @apply flex flex-1 cursor-pointer items-center justify-center gap-x-2 gap-y-1 rounded-lg py-2 hover:bg-neutral-200;
   }
 
   .single-post-footer-icon-container {
-    @apply flex flex-1 cursor-pointer items-center justify-center gap-x-2 rounded-lg py-2 text-sm font-medium text-neutral-500 hover:bg-neutral-100
+    @apply flex flex-1 cursor-pointer items-center justify-center gap-x-2 rounded-lg py-2 text-sm font-medium text-neutral-500 hover:bg-neutral-100;
   }
 }

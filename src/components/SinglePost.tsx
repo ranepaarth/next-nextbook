@@ -1,11 +1,11 @@
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid';
-import { collection, deleteDoc, doc, DocumentData } from 'firebase/firestore';
+import { deleteDoc, doc, DocumentData } from 'firebase/firestore';
 import { MessageSquareMoreIcon, Share, ThumbsUpIcon } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React from 'react';
-import ReactTextareaAutosize from 'react-textarea-autosize';
+import TextareaAutosize from 'react-textarea-autosize';
 import { db } from '../../firebase';
 import ProfileAvatar from './ProfileAvatar';
 
@@ -22,7 +22,7 @@ function SinglePost({ post, postId }: DocumentData) {
   });
 
   return (
-    <article className='flex w-full flex-col rounded-lg bg-white pb-2 pt-4 shadow-md'>
+    <article className='flex h-fit w-full flex-col rounded-lg bg-white pb-2 pt-4 shadow-md'>
       <div className='flex items-start justify-between px-4'>
         <div className='flex items-start gap-x-2'>
           <ProfileAvatar src={post.avatarURL} />
@@ -52,10 +52,11 @@ function SinglePost({ post, postId }: DocumentData) {
         </div>
       </div>
 
-      <div className='mt-2 px-4 text-sm font-light md:text-base'>
-        <ReactTextareaAutosize
-          value={post.message}
-          className='w-full resize-none bg-transparent outline-none'
+      <div className='mt-2 h-fit min-h-fit w-full overflow-y-visible px-4 text-sm font-light md:text-base'>
+        <TextareaAutosize
+          value={post?.message}
+          maxRows={20}
+          className='scrollbar-hide h-fit min-h-fit w-full resize-none overflow-y-visible bg-transparent outline-none'
           disabled
         />
       </div>
