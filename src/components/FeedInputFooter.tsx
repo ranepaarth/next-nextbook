@@ -35,11 +35,11 @@ function FeedInputFooter({ removeImage, setImage, image }: Props) {
   return (
     <div className='flex flex-col gap-y-4 pt-2'>
       {image && (
-        <div
-          className='hover: relative flex transform cursor-pointer flex-col items-center gap-y-4 rounded-lg bg-neutral-100 p-2'
-          onClick={removeImage}
-        >
-          <span className='absolute right-2 top-2 flex justify-end rounded-full bg-neutral-300 p-1.5 text-xs font-medium capitalize text-neutral-700 transition-colors duration-200 ease-in-out hover:bg-neutral-400 z-20'>
+        <div className='hover: relative flex transform cursor-pointer flex-col items-center gap-y-4 rounded-lg bg-neutral-100 p-2'>
+          <span
+            className='absolute right-2 top-2 z-20 flex justify-end rounded-full bg-neutral-300 p-1.5 text-xs font-medium capitalize text-neutral-700 transition-colors duration-200 ease-in-out hover:bg-neutral-400'
+            onClick={removeImage}
+          >
             <XMarkIcon className='h-4 w-4' strokeWidth={3} />
           </span>
           <Image
@@ -47,7 +47,7 @@ function FeedInputFooter({ removeImage, setImage, image }: Props) {
             alt='image'
             width={1080}
             height={1080}
-            className='w-full object-contain filter transition duration-150 hover:brightness-110 rounded-md'
+            className='w-full rounded-md object-contain filter transition duration-150 hover:brightness-110'
           />
         </div>
       )}
